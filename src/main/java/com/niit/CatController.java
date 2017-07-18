@@ -1,7 +1,10 @@
 package com.niit;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,53 +20,60 @@ public class CatController {
 
 	  // Landing Page--product is added in Model for Spring Form---List is added
 	 // to retrive all data
-	 @RequestMapping("/Catagory")
+	 @RequestMapping("/catagory")
 	 public String home(Model m) {
 	  m.addAttribute("isEditing", false);
-	  m.addAttribute("Catagory", new Catagory());
-	  m.addAttribute("CatagoryList", catagoryDAO.getAllCatagory());
+	  m.addAttribute("catagory", new Catagory());
+	  m.addAttribute("catagoryList", catagoryDAO.getAllCatagory());
 	  m.addAttribute("msg", "");
-	  return "home";
+	  return "catagory";
 	 }
 
-	  // Saving Product
-	 @RequestMapping(value = "/save", method = RequestMethod.POST)
-	 public String save(@ModelAttribute("product") Catagory c, Model m) {
-		 catagoryDAO.save(c);
-	  m.addAttribute("product", new Catagory());
-	  m.addAttribute("productList", catagoryDAO.getAllCatagory());
-	  m.addAttribute("msg", "product added successfully");
-	  return "Catagory";
+	  // Saving catagory
+	 @RequestMapping(value = "/savecat", method = RequestMethod.POST)
+	 public String savecat(@Valid @ModelAttribute("catagory") Catagory c,BindingResult result, Model m) 
+	 {
+		 if(result.hasErrors()){
+			 return "catagory";
+		 }
+		 else {
+		 
+		 catagoryDAO.savecat(c);
+	  m.addAttribute("catagory", new Catagory());
+	  m.addAttribute("catagoryList", catagoryDAO.getAllCatagory());
+	  m.addAttribute("msg", "catagory added successfully");
+	  return "catagory";
+	 }
 	 }
 
 	  // Displaying Update Form
-	 @RequestMapping(value = "/update/{pid}", method = RequestMethod.GET)
-	 public String update(@PathVariable("catid") int catid, Model m) {
-	  Catagory c = catagoryDAO.getById(catid);
+	 @RequestMapping(value = "/updatecat/{catid}", method = RequestMethod.GET)
+	 public String updatecat(@PathVariable("catid") int catid, Model m) {
+	  Catagory c = catagoryDAO.getcatById(catid);
 	  m.addAttribute("isEditing", true);
-	  m.addAttribute("Catagory", c);
-	  m.addAttribute("CatagoryList", catagoryDAO.getAllCatagory());
+	  m.addAttribute("catagory", c);
+	  m.addAttribute("catagoryList", catagoryDAO.getAllCatagory());
 	  m.addAttribute("msg", "");
-	  return "Catagory";
+	  return "catagory";
 	 }
 
-	  // Updating Product
-	 @RequestMapping(value = "/update", method = RequestMethod.POST)
-	 public String update(@ModelAttribute("product") Catagory c, Model m) {
-		 catagoryDAO.update(c);
-	  m.addAttribute("Catagory", new Catagory());
-	  m.addAttribute("CatagoryList",catagoryDAO.getAllCatagory());
+	  // Updating catagory
+	 @RequestMapping(value = "/updatecat", method = RequestMethod.POST)
+	 public String updatecat(@ModelAttribute("catagory") Catagory c, Model m) {
+		catagoryDAO.updatecat(c);
+	  m.addAttribute("catagory", new Catagory());
+	  m.addAttribute("catagoryList",catagoryDAO.getAllCatagory());
 	  m.addAttribute("msg", "product updated successfully");
-	  return "Catagory";
+	  return "catagory";
 	 }
 
-	  // Deleting Product
-	 @RequestMapping(value = "/delete/{pid}", method = RequestMethod.GET)
-	 public String delete(@PathVariable("catid") int catid, Model m) {
-		 catagoryDAO.deleteById(catid);
-	  m.addAttribute("Catagory", new Catagory());
-	  m.addAttribute("CatagoryList", catagoryDAO.getAllCatagory());
+	  // Deleting catagory
+	 @RequestMapping(value = "/deletecat/{catid}", method = RequestMethod.GET)
+	 public String deletecat(@PathVariable("catid") int catid, Model m) {
+		 catagoryDAO.deletecatById(catid);
+	  m.addAttribute("catagory", new Catagory());
+	  m.addAttribute("catagoryList", catagoryDAO.getAllCatagory());
 	  m.addAttribute("msg", "product deleted successfully");
-	  return "Catagory";
+	  return "catagory";
 	 }
 }
