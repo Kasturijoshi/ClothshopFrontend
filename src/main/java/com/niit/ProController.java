@@ -9,7 +9,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.stream.Stream;
+
+import javax.servlet.http.HttpServletRequest;
 import com.niit.dao.ProDao;
 import com.niit.model.Product;
 
@@ -31,12 +38,14 @@ public class ProController {
 
 	  // Saving Product
 	 @RequestMapping(value = "/savepro", method = RequestMethod.POST)
-	 public String savepro(@Valid @ModelAttribute("Product") Product p,BindingResult result, Model m) 
+	 public String savepro(@Valid @ModelAttribute("Product") Product p,BindingResult result, Model m, HttpServletRequest request) 
 	 {
 		 if(result.hasErrors()){
 			 return "Product";
 		 }
 		 else {
+		 p.setImgpath(p.getFile().getOriginalFilename());
+		 storeImage(p,request);
 		 
 			 ProductDAO.savepro(p);
 	  m.addAttribute("Product", new Product());
@@ -75,5 +84,31 @@ public class ProController {
 	  m.addAttribute("ProductList", ProductDAO.getAllProduct());
 	  m.addAttribute("msg", "product deleted successfully");
 	  return "Product";
+	 }
+	 
+	 public void storeImage(Product p,HttpServletRequest request)
+	 {
+		 String path=request.getRealPath("/");
+		 path= path+"resources\\images\\" +p.getFile().getOriginalFilename();
+		MultipartFile file=p.getFile();
+		
+		if(!file.isEmpty())
+		{
+			try
+			{
+				byte bytes[]=file.getBytes();
+				File serverfile=new File(path);
+				serverfile.createNewFile();
+				
+				BufferedOutputStream stream=new BufferedOutputStream(new FileOutputStream(serverfile));
+				stream.write(bytes);
+				stream.close();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		 
 	 }
 }

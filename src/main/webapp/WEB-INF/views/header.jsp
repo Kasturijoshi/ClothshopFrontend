@@ -4,9 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
 <title>Insert title here</title>
 </head>
 <body>
@@ -26,7 +24,7 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">lehenga choli </a></li>
+            <li><a href="#">lehenga </a></li>
             <li><a href="#">Sadi</a></li>
              <li><a href="#">Panjabi dress</a></li>
              <li><a href="#">One piece</a></li>
@@ -45,13 +43,13 @@
           <ul class="dropdown-menu">
             <li><a href="Product">Manage Product</a></li>
             <li><a href="catagory">Manage Catagory</a></li>
-            <li><a href="supplier">Manage Supplier</a></li>
+            <li><a href="Supplier">Manage Supplier</a></li>
           </ul>
         </li>
  <li><a href="#">About us</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-         <li><a href="<c:url value= '/Register'/> "><span class="glyphicon glyphicon-pencil"></span>Register</a></li> 
+         <li><a href="Register"><span class="glyphicon glyphicon-pencil"></span>Register</a></li> 
       <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Login</a></li>
       </ul>

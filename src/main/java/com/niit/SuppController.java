@@ -19,29 +19,29 @@ public class SuppController {
 
 	  // Landing Page--product is added in Model for Spring Form---List is added
 	 // to retrive all data
-	 @RequestMapping("/supplier")
+	 @RequestMapping("/Supplier")
 	 public String home(Model m) {
 	  m.addAttribute("isEditing", false);
 	  m.addAttribute("Supplier", new Supplier());
 	  m.addAttribute("SupplierList", SupplierDAO.getAllSupplier());
 	  m.addAttribute("msg", "");
-	  return "supplier";
+	  return "Supplier";
 	 }
 
 	  // Saving Supplier
-	 @RequestMapping(value = "/save", method = RequestMethod.POST)
+	 @RequestMapping(value = "/savesup", method = RequestMethod.POST)
 	 public String savesup(@Valid @ModelAttribute("Supplier") Supplier s,BindingResult result, Model m) 
 	 {
 		 if(result.hasErrors()){
-			 return "supplier";
+			 return "Supplier";
 		 }
 		 else {
 		 
 			 SupplierDAO.savesup(s);
-	  m.addAttribute("supplier", new Supplier());
+	  m.addAttribute("Supplier", new Supplier());
 	  m.addAttribute("SupplierList", SupplierDAO.getAllSupplier());
 	  m.addAttribute("msg", "supplier added successfully");
-	  return "supplier";
+	  return "Supplier";
 	 }
 	 }
 
@@ -53,17 +53,17 @@ public class SuppController {
 	  m.addAttribute("Supplier", s);
 	  m.addAttribute("SupplierList", SupplierDAO.getAllSupplier());
 	  m.addAttribute("msg", "");
-	  return "supplier";
+	  return "Supplier";
 	 }
 
 	  // Updating Supplier
 	 @RequestMapping(value = "/updatesup", method = RequestMethod.POST)
-	 public String updatesup(@ModelAttribute("supplier") Supplier s, Model m) {
+	 public String updatesup(@ModelAttribute("Supplier") Supplier s, Model m) {
 		 SupplierDAO.updatesup(s);
 	  m.addAttribute("Supplier", new Supplier());
 	  m.addAttribute("SupplierList",SupplierDAO.getAllSupplier());
 	  m.addAttribute("msg", "supplier updated successfully");
-	  return "supplier";
+	  return "Supplier";
 	 }
 
 	  // Deleting Supplier
@@ -73,6 +73,6 @@ public class SuppController {
 	  m.addAttribute("Supplier", new Supplier());
 	  m.addAttribute("SupplierList", SupplierDAO.getAllSupplier());
 	  m.addAttribute("msg", "supplier deleted successfully");
-	  return "supplier";
+	  return "Supplier";
 	 }
 }

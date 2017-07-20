@@ -24,25 +24,20 @@ ${msg}
 </c:if>
 <form:form method = "POST" modelAttribute="catagory" action = "${formaction}">
          <table>
+
 <tr>
-               <td><form:label path = "catid">cat id:</form:label></td>
-               <td><form:input path = "catid" /></td>
-               <td>
-               <form:errors path="catid"/>
-               </td>>
-            </tr>
-<tr>
+				<form:input type= "hidden" path="catname" />
                <td><form:label path = "catname">Name:</form:label></td>
-               <td><form:input path = "catname" /></td>
+               <td><form:input  cssClass="form-control" path = "catname" /></td>
                 <td>
-               <form:errors path="catname"/>
-               </td>>
+               <form:errors  cssClass="form-control" path="catname"/>
+               </td>
             </tr>
 <tr>
                <td><form:label path = "catdesc">Description</form:label></td>
-               <td><form:input path = "catdesc" /></td> <td>
-               <form:errors path="catdesc"/>
-               </td>>
+               <td><form:input  cssClass="form-control" path = "catdesc" /></td> <td>
+               <form:errors  cssClass="form-control" path="catdesc"/>
+               </td>
             </tr>
 <tr>
                <td colspan = "2">
@@ -56,7 +51,8 @@ ${msg}
             </tr>
 </table>
 </form:form>
-      <table>
+      <table border="1" class="table">
+
 <tr>
       <th>ID</th>
       <th>Name</th>
@@ -67,8 +63,8 @@ ${msg}
       <td>${cat.catid}</td>
       <td>${cat.catname}</td>
       <td>${cat.catdesc}</td>
-      <td><a href="updatecat/${cat.catid}">Update</a></td>
-      <td><a href="deletecat/${cat.catid}">Delete</a></td>
+      <td><a href="<c:url value='/updatecat/${cat.catid}'/> ">Update</a></td>
+      <td><a href="<c:url value='/deletecat/${cat.catid}'/> ">Delete</a></td>
       </tr>
 </c:forEach>
       </table>

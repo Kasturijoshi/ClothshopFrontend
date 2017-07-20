@@ -16,110 +16,64 @@
 <div>
 ${msg}
 </div>
-<c:if test="${isEditing}" >
-<c:url var="formaction"  value="/updatecus"/>
-</c:if>
-<c:if test="${not isEditing}" >
-<c:url var="formaction"  value="/savecus"/>
-</c:if>
-<form:form method = "POST" modelAttribute="Customer" action = "${formaction}">
+
+<form:form method = "POST" modelAttribute="Customer" action = "savecus">
          <table>
-<tr>
-               <td><form:label path = "cusid">customer id:</form:label></td>
-               <td><form:input path = "cusid" /></td>
-               <td>
-               <form:errors path="cusid"/>
-               </td>
-            </tr>
 
             <tr>
+            <form:input type= "hidden" path="cusid" />
                <td><form:label path = "cusname">Name:</form:label></td>
-               <td><form:input path = "cusname" /></td>
+               <td><form:input  cssClass="form-control" path = "cusname" /></td>
                 <td>
-               <form:errors path="cusname"/>
+               <form:errors  cssClass="form-control" path="cusname"/>
                </td>
             </tr>
             <tr>
                <td><form:label path = "pswd">Password:</form:label></td>
-               <td><form:input path = "pswd" /></td>
+               <td><form:input  cssClass="form-control" path = "pswd" /></td>
                 <td>
-               <form:errors path="pswd"/>
+               <form:errors cssClass="form-control" path="pswd"/>
                </td>
             </tr>
             <tr>
                <td><form:label path = "email">Email:</form:label></td>
-               <td><form:input path = "email" /></td>
+               <td><form:input  cssClass="form-control" path = "email" /></td>
                 <td>
-               <form:errors path="email"/>
+               <form:errors cssClass="form-control" path="email"/>
                </td>
             </tr>
             <tr>
                <td><form:label path = "cusadd">Customer Address:</form:label></td>
-               <td><form:input path = "cusadd" /></td>
+               <td><form:input cssClass="form-control" path = "cusadd" /></td>
                 <td>
-               <form:errors path="cusadd"/>
+               <form:errors cssClass="form-control" path="cusadd"/>
                </td>
             </tr>
             <tr>
                <td><form:label path = "phnno">Phone number:</form:label></td>
-               <td><form:input path = "phnno" /></td>
+               <td><form:input cssClass="form-control" path = "phnno" /></td>
                 <td>
-               <form:errors path="phnno"/>
+               <form:errors cssClass="form-control" path="phnno"/>
                </td>
             </tr>
             <tr>
                <td><form:label path = "username">User Name:</form:label></td>
-               <td><form:input path = "username" /></td>
+               <td><form:input cssClass="form-control" path = "username" /></td>
                 <td>
-               <form:errors path="username"/>
+               <form:errors cssClass="form-control" path="username"/>
                </td>
             </tr>
             <tr>
                <td><form:label path = "userrole">User Role:</form:label></td>
-               <td><form:input path = "userrole" /></td>
+               <td><form:input cssClass="form-control" path = "userrole" /></td>
                 <td>
-               <form:errors path="userrole"/>
+               <form:errors cssClass="form-control" path="userrole"/>
                </td>
-            </tr>
-            
-
-<tr>
-               <td colspan = "2">
-               <c:if test="${isEditing}" >
-                  <input type = "submit" value = "Updatecus"/>
-                  </c:if>
-                     <c:if test="${not isEditing}" >
-                  <input type = "submit" value = "Savecus"/>
-                  </c:if>
-               </td>
-            </tr>
+            </tr> 
 </table>
 </form:form>
-      <table>
-<tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Password</th>
-      <th>Email</th>
-      <th>Customer address</th>
-      <th>Phone number</th>
-      <th>User Name</th>
-      <th>User Role</th>
-      </tr>
-<c:forEach var="cus" items="${CustomerList}" >
-<tr>
-      <td>${cus.cusid}</td>
-      <td>${cus.cusname}</td>
-      <td>${cus.pswd}</td>
-      <td>${cus.email}</td>
-      <td>${cus.cusadd}</td>
-      <td>${cus.phnno}</td>
-      <td>${cus.username}</td>
-      <td>${cus.userrole}</td>
-      <td><a href="updatecus/${cus.cusid}">Update</a></td>
-      <td><a href="deletecus/${cus.cusid}">Delete</a></td>
-      </tr>
-</c:forEach>
-      </table>
+      <div class="wrapper">
+      <button type="submit" class="btn btn-default">Submit</button>
+      </div>
 </body>
 </html>

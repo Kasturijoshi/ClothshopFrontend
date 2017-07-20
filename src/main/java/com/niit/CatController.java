@@ -48,7 +48,7 @@ public class CatController {
 
 	  // Displaying Update Form
 	 @RequestMapping(value = "/updatecat/{catid}", method = RequestMethod.GET)
-	 public String updatecat(@PathVariable("catid") int catid, Model m) {
+	 public String updatecat(@PathVariable("catid") String catid, Model m) {
 	  Catagory c = catagoryDAO.getcatById(catid);
 	  m.addAttribute("isEditing", true);
 	  m.addAttribute("catagory", c);
@@ -63,17 +63,17 @@ public class CatController {
 		catagoryDAO.updatecat(c);
 	  m.addAttribute("catagory", new Catagory());
 	  m.addAttribute("catagoryList",catagoryDAO.getAllCatagory());
-	  m.addAttribute("msg", "product updated successfully");
+	  m.addAttribute("msg", "catagory updated successfully");
 	  return "catagory";
 	 }
 
 	  // Deleting catagory
 	 @RequestMapping(value = "/deletecat/{catid}", method = RequestMethod.GET)
-	 public String deletecat(@PathVariable("catid") int catid, Model m) {
+	 public String deletecat(@PathVariable("catid") String catid, Model m) {
 		 catagoryDAO.deletecatById(catid);
 	  m.addAttribute("catagory", new Catagory());
 	  m.addAttribute("catagoryList", catagoryDAO.getAllCatagory());
-	  m.addAttribute("msg", "product deleted successfully");
+	  m.addAttribute("msg", "catagory deleted successfully");
 	  return "catagory";
 	 }
 }
